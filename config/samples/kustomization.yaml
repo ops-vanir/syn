@@ -1,0 +1,5 @@
+## Append samples of your project ##
+resources:
+- syn_v1alpha1_supervisedgit.yaml
+- syn_v1alpha1_changerequest.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

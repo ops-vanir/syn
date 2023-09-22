@@ -1,0 +1,12 @@
+apiVersion: syn.servicenow.com/v1alpha1
+kind: SupervisedGit
+metadata:
+  labels:
+    app.kubernetes.io/name: supervisedgit
+    app.kubernetes.io/instance: supervisedgit-sample
+    app.kubernetes.io/part-of: syn3
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: syn3
+  name: supervisedgit-sample
+spec:
+  # TODO(user): Add fields here

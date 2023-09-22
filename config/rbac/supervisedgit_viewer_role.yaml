@@ -1,0 +1,27 @@
+# permissions for end users to view supervisedgits.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: supervisedgit-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: syn3
+    app.kubernetes.io/part-of: syn3
+    app.kubernetes.io/managed-by: kustomize
+  name: supervisedgit-viewer-role
+rules:
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - supervisedgits
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - supervisedgits/status
+  verbs:
+  - get

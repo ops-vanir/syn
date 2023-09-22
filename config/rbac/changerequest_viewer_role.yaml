@@ -1,0 +1,27 @@
+# permissions for end users to view changerequests.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: changerequest-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: syn3
+    app.kubernetes.io/part-of: syn3
+    app.kubernetes.io/managed-by: kustomize
+  name: changerequest-viewer-role
+rules:
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - changerequests
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - changerequests/status
+  verbs:
+  - get

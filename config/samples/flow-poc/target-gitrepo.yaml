@@ -1,0 +1,19 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: gitrepo-sample
+  namespace: default
+spec:
+  interval: 1m0s
+  ref:
+    branch: main
+  secretRef:
+    name: gitrepo-sample
+  url: https://my.registry/important/repo.git
+status:
+  artifact:
+    lastUpdateTime: "2023-09-25T13:15:23Z"
+    path: gitrepository/flux-system/flux-system/5867e3e256f96b731cfe6cbd0671b9ac1f7f548c.tar.gz
+    revision: stage@sha1:5867e3e256f96b731cfe6cbd0671b9ac1f7f548c
+    size: 318793
+    url: http://source-controller.flux-system.svc.cluster.local./gitrepository/flux-system/flux-system/5867e3e256f96b731cfe6cbd0671b9ac1f7f548c.tar.gz

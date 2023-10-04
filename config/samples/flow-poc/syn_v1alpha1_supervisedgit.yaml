@@ -12,4 +12,7 @@ spec:
   targetRef:
     kind: GitRepository
     name: gitrepo-sample
+    childLabelSelector: 
+      matchLabels:
+        original: label
   # TODO(user): Add fields here

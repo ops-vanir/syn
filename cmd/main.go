@@ -24,6 +24,11 @@ import (
 	// to ensure that exec-entrypoint and run can make use of them.
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 
+	fluxhelm "github.com/fluxcd/helm-controller/api/v2beta1"
+	fluxkustomize "github.com/fluxcd/kustomize-controller/api/v1"
+	fluxsource "github.com/fluxcd/source-controller/api/v1"
+	synv1alpha1 "github.com/ops-vanir/syn/api/v1alpha1"
+	"github.com/ops-vanir/syn/internal/controller"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
@@ -31,9 +36,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
-
-	synv1alpha1 "github.com/ops-vanir/syn/api/v1alpha1"
-	"github.com/ops-vanir/syn/internal/controller"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -46,6 +48,9 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
 	utilruntime.Must(synv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(fluxsource.AddToScheme(scheme))
+	utilruntime.Must(fluxkustomize.AddToScheme(scheme))
+	utilruntime.Must(fluxhelm.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 

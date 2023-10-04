@@ -1,0 +1,100 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.13.0
+  name: changerequests.syn.servicenow.com
+spec:
+  group: syn.servicenow.com
+  names:
+    kind: ChangeRequest
+    listKind: ChangeRequestList
+    plural: changerequests
+    shortNames:
+    - chg
+    - chgs
+    singular: changerequest
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.targetRevision
+      name: Revision
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ChangeRequest is the Schema for the changerequests API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ChangeRequestSpec defines the desired state of ChangeRequest
+            properties:
+              chgTemplateName:
+                description: ChgTemplateName is the name of the change request template
+                  which is used for Normal or Standard change request
+                type: string
+              chgTemplateValues:
+                additionalProperties:
+                  type: string
+                description: ChgTemplateValues is a Key/value pairs to populate the
+                  CHG template used for opening change requests
+                type: object
+              closeCode:
+                description: Close code is the code to close a change request with
+                enum:
+                - success
+                - fail
+                type: string
+              currentRevision:
+                description: CurrentRevision is the currently applied revision of
+                  the workload If no revision currently applied should be set to None
+                type: string
+              targetRevision:
+                description: TargetRevision is the revision to apply to the workload
+                type: string
+              workload:
+                description: Workload or project that the change is requested for
+                  If not supplied will be inferred from the namespace
+                type: string
+            required:
+            - targetRevision
+            type: object
+          status:
+            default:
+              observedGeneration: -1
+            description: ChangeRequestStatus defines the observed state of ChangeRequest
+            properties:
+              approvedRevision:
+                description: ApprovedRevision is the revision that was approved by
+                  the change request approver. This will be either the revision requested
+                  if approved or empty if the change request was not approved.
+                type: string
+              observedGeneration:
+                description: ObservedGeneration is the last observed generation of
+                  the changerequest
+                format: int64
+                type: integer
+              requestPhase:
+                description: RequestPhase is the overall status for the changerequest
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

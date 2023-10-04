@@ -1,0 +1,97 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - helm.toolkit.fluxcd.io
+  resources:
+  - helmreleases
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - kustomize.toolkit.fluxcd.io
+  resources:
+  - kustomizations
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - source.toolkit.fluxcd.io
+  resources:
+  - gitrepositories
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - changerequests
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - changerequests/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - changerequests/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - supervisedgits
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - supervisedgits/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - syn.servicenow.com
+  resources:
+  - supervisedgits/status
+  verbs:
+  - get
+  - patch
+  - update
